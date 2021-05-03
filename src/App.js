@@ -48,6 +48,8 @@ const App = () => {
   )
 }
 
+// I wanted to use styled components since I saw that you use them on your website.
+
 const HeroContainer = styled.div`
   background: var(--white);
   padding: 1rem 0;

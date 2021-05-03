@@ -21,7 +21,6 @@ const Wrapper = styled.div`
   width: 300px;
   height: 240px;
   overflow: scroll;
-  /* border: 0.1px solid #d8d9d9; */
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 `

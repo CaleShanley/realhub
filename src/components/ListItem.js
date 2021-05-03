@@ -6,10 +6,11 @@ const ListItem = ({ comment }) => {
 
   return (
     <ListContainer
+      // Each comment I noticed a had "acknowledged" in the data. so i attached a onClick function to change the result from with true or false once clicked.
       onClick={() => setAcknowledged(!acknowledged)}
       acknowledged={acknowledged}>
       <Wrapper>
-        {/* I was hoping to try and set the svg as blue when there are new notifications*/}
+        {/* I was couldn't figure out how to set the svg as blue when there are new notifications*/}
         <ImageDiv>
           <Image src={comment.user.image.original_url} alt="" />
         </ImageDiv>
