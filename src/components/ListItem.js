@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const ListItem = ({ comment }) => {
-  const [acknowledged, setAcknowledged] = useState(comment.acknowledged)
-
+const ListItem = ({ comment, handleClick }) => {
   return (
     <ListContainer
+      onClick={() => handleClick(comment.id)}
       // Each comment I noticed a had "acknowledged" in the data. so i attached a onClick function to change the result from with true or false once clicked.
-      onClick={() => setAcknowledged(!acknowledged)}
-      acknowledged={acknowledged}>
+      acknowledged={comment.acknowledged}>
       <Wrapper>
         {/* I was couldn't figure out how to set the svg as blue when there are new notifications*/}
         <ImageDiv>

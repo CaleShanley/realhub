@@ -3,10 +3,23 @@ import React, { useState } from 'react'
 import { ReactComponent as EmailIcon } from './images/svg/mail.svg'
 import { ReactComponent as BellIcon } from './images/svg/bell.svg'
 import { Container } from './components/Layout'
-import List from './components/List'
+import ListItem from './components/ListItem'
+import data from './comment_data.json'
 
 const App = () => {
+  const [comments, setComments] = useState(data)
   const [showList, setShowList] = useState(false)
+  // const [allSeen, setAllSeen] = useState(false)
+
+  // const [colorChosen, setColorChosen] = useState('blue')
+  // i found this online and honestly am not very familar with it
+  const handleAcknowledged = (id) => {
+    const index = comments.findIndex((comment) => comment.id === id) // Get current comment index
+    const allComments = [...comments] // Make a copy of all comments
+    const updatedComment = { ...allComments[index] } // Make a copy of current comment
+    updatedComment.acknowledged = true
+    setComments(allComments)
+  }
 
   return (
     <Container>
@@ -36,9 +49,23 @@ const App = () => {
               </RowDiv>
               <RowDiv>
                 <Notifications onClick={() => setShowList(!showList)}>
-                  <BellIcon />
+                  <BellIcon
+                    // pass as a prop
+                    allSeen={() => !comments.find((c) => c.acknowledged)}
+                  />
                 </Notifications>
-                {showList && <List />}
+                {showList && (
+                  <List>
+                    {comments &&
+                      comments.map((comment) => (
+                        <ListItem
+                          key={comment.id}
+                          comment={comment}
+                          handleClick={handleAcknowledged}
+                        />
+                      ))}
+                  </List>
+                )}
               </RowDiv>
             </Header>
           </Nav>
@@ -154,6 +181,14 @@ const Flex = styled.div`
   display: flex;
   align-items: center;
   align-content: center;
+`
+
+const List = styled.div`
+  position: absolute;
+  top: 140px;
+  height: 240px;
+  margin-left: -258px;
+  overflow: scroll;
 `
 
 export default App
